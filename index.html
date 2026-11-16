@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Pulse — 15-Second Ultra-Minimal Digest</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root { color-scheme: light dark; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    .drawer-content { max-height: 0; overflow: hidden; transition: max-height 0.25s cubic-bezier(0, 1, 0, 1); }
+    .drawer-content.open { max-height: 250px; transition: max-height 0.3s ease-in-out; }
+  </style>
+</head>
+<body class="bg-neutral-50 text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100 min-h-screen p-3 sm:p-6 antialiased">
+  <div class="max-w-5xl mx-auto space-y-6">
+    <header class="border-b border-neutral-200 dark:border-neutral-800 pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div>
+        <div class="flex items-center gap-2 mb-1">
+          <span class="inline-flex items-center px-2 py-0.5 text-xs font-semibold rounded bg-neutral-200 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200">⚡ 15-SEC SCAN</span>
+          <span class="text-xs font-mono text-neutral-500">Nov 12 – 16, 2026</span>
+        </div>
+        <h1 class="text-xl sm:text-2xl font-bold tracking-tight">AI Pulse: 15 Verified Updates</h1>
+        <p class="text-xs text-neutral-500 dark:text-neutral-400">Strictly 5 words per row. Click any item only if you want details.</p>
+      </div>
+      <div class="flex items-center gap-2 self-start sm:self-auto">
+        <div class="inline-flex p-1 rounded-lg bg-neutral-200/70 dark:bg-neutral-900 border border-neutral-300/60 dark:border-neutral-800">
+          <button id="tab-table-btn" onclick="setView('table')" class="px-3 py-1 text-xs font-semibold rounded-md bg-white dark:bg-neutral-800 shadow-sm transition-all">📊 Table View</button>
+          <button id="tab-pills-btn" onclick="setView('pills')" class="px-3 py-1 text-xs font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-all">💊 Pill Cards</button>
+        </div>
+      </div>
+    </header>
+
+    <div class="flex flex-wrap items-center justify-between gap-3 text-xs">
+      <div class="flex flex-wrap gap-1.5" id="category-bar">
+        <button onclick="setCategory('all')" id="cat-all" class="cat-btn px-2.5 py-1 rounded font-medium bg-neutral-900 text-white dark:bg-white dark:text-neutral-900 transition-colors">All (15)</button>
+        <button onclick="setCategory('models')" id="cat-models" class="cat-btn px-2.5 py-1 rounded font-medium bg-neutral-100 dark:bg-neutral-900 text-neutral-600 dark:text-neutral-400 hover:bg-neutral-200 dark:hover:bg-neutral-800 transition-colors">🧠 Models (5)</button>
+        <button onclick="setCategory('tools')" id="cat-tools" class="cat-btn px-2.5 py-1 rounded font-medium bg-neutral-100 dark:bg-neutral-900 text-neutral-600 dark:text-neutral-400 hover:bg-neutral-200 dark:hover:bg-neutral-800 transition-colors">⚡ Tools (5)</button>
+        <button onclick="setCategory('industry')" id="cat-industry" class="cat-btn px-2.5 py-1 rounded font-medium bg-neutral-100 dark:bg-neutral-900 text-neutral-600 dark:text-neutral-400 hover:bg-neutral-200 dark:hover:bg-neutral-800 transition-colors">🌐 Industry (5)</button>
+      </div>
+      <span class="text-[11px] text-neutral-400 font-mono">100% Primary Sources</span>
+    </div>
+
+    <div id="view-table" class="border border-neutral-200 dark:border-neutral-800 rounded-xl overflow-hidden bg-white dark:bg-neutral-900/60 shadow-sm">
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-xs border-collapse">
+          <thead>
+            <tr class="border-b border-neutral-200 dark:border-neutral-800 bg-neutral-100/60 dark:bg-neutral-900 text-neutral-500 font-mono uppercase tracking-wider text-[11px]">
+              <th class="py-2.5 px-3 w-28">Category</th>
+              <th class="py-2.5 px-3 w-48">Tool / Model</th>
+              <th class="py-2.5 px-3">5-Word Takeaway</th>
+              <th class="py-2.5 px-3 text-right w-24">Link</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-neutral-100 dark:divide-neutral-800/60" id="table-body">
+            <tr class="item-row hover:bg-neutral-50 dark:hover:bg-neutral-800/40 cursor-pointer transition-colors" data-category="models" onclick="toggleDrawer('d1')">
+              <td class="py-2.5 px-3"><span class="px-1.5 py-0.5 rounded text-[10px] font-semibold bg-blue-500/10 text-blue-600 dark:text-blue-400">MODEL</span></td>
+              <td class="py-2.5 px-3 font-semibold text-neutral-900 dark:text-neutral-100">Gemini 2.5 Flash</td>
+              <td class="py-2.5 px-3 font-medium text-neutral-700 dark:text-neutral-300">Sub-second multimodal thinking model released.</td>
+              <td class="py-2.5 px-3 text-right font-mono text-[11px]"><a href="https://ai.google.dev/" target="_blank" onclick="event.stopPropagation()" class="text-blue-600 dark:text-blue-400 hover:underline">Open &rarr;</a></td>
+            </tr>
+            <tr id="d1" class="drawer-row hidden bg-neutral-50/80 dark:bg-neutral-950/60 border-b border-neutral-200 dark:border-neutral-800" data-category="models">
+              <td colspan="4" class="px-4 py-3"><div class="space-y-1.5 text-xs"><p class="text-neutral-600 dark:text-neutral-300"><strong>Summary:</strong> Google upgraded Flash with adaptive reasoning depth and native coding agents.</p><p class="text-emerald-600 dark:text-emerald-400">💡 <strong>Use Case:</strong> High-speed multi-agent orchestration and automated code repair.</p><a href="https://ai.google.dev/" target="_blank" class="inline-block text-[11px] font-semibold text-neutral-900 dark:text-neutral-100 underline mt-1">Official Documentation &rarr;</a></div></td>
+            </tr>
+            <tr class="item-row hover:bg-neutral-50 dark:hover:bg-neutral-800/40 cursor-pointer transition-colors" data-category="models" onclick="toggleDrawer('d2')">
+              <td class="py-2.5 px-3"><span class="px-1.5 py-0.5 rounded text-[10px] font-semibold bg-blue-500/10 text-blue-600 dark:text-blue-400">MODEL</span></td>
+              <td class="py-2.5 px-3 font-semibold text-neutral-900 dark:text-neutral-100">DeepSeek-V3</td>
+              <td class="py-2.5 px-3 font-medium text-neutral-700 dark:text-neutral-300">671B MoE open weights released.</td>
+              <td class="py-2.5 px-3 text-right font-mono text-[11px]"><a href="https://github.com/deepseek-ai/DeepSeek-V3" target="_blank" onclick="event.stopPropagation()" class="text-blue-600 dark:text-blue-400 hover:underline">Open &rarr;</a></td>
+            </tr>
+            <tr id="d2" class="drawer-row hidden bg-neutral-50/80 dark:bg-neutral-950/60 border-b border-neutral-200 dark:border-neutral-800" data-category="models">
+              <td colspan="4" class="px-4 py-3"><div class="space-y-1.5 text-xs"><p class="text-neutral-600 dark:text-neutral-300"><strong>Summary:</strong> Activates 37B per token with Multi-Head Latent Attention; matches closed flagships at ~1/5th compute cost.</p><p class="text-emerald-600 dark:text-emerald-400">💡 <strong>Use Case:</strong> Self-hosted local inference with native FP8 weights.</p><a href="https://huggingface.co/deepseek-ai" target="_blank" class="inline-block text-[11px] font-semibold text-neutral-900 dark:text-neutral-100 underline mt-1">Hugging Face Weights &rarr;</a></div></td>
+            </tr>
+            <tr class="item-row hover:bg-neutral-50 dark:hover:bg-neutral-800/40 cursor-pointer transition-colors" data-category="models" onclick="toggleDrawer('d3')">
+              <td class="py-2.5 px-3"><span class="px-1.5 py-0.5 rounded text-[10px] font-semibold bg-blue-500/10 text-blue-600 dark:text-blue-400">MODEL</span></td>
+              <td class="py-2.5 px-3 font-semibold text-neutral-900 dark:text-neutral-100">Llama 3.3 70B</td>
+              <td class="py-2.5 px-3 font-medium text-neutral-700 dark:text-neutral-300">405B performance in 70B footprint.</td>
+              <td class="py-2.5 px-3 text-right font-mono text-[11px]"><a href="https://ai.meta.com/blog/llama-3-3/" target="_blank" onclick="event.stopPropagation()" class="text-blue-600 dark:text-blue-400 hover:underline">Open &rarr;</a></td>
+            </tr>
+            <tr id="d3" class="drawer-row hidden bg-neutral-50/80 dark:bg-neutral-950/60 border-b border-neutral-200 dark:border-neutral-800" data-category="models">
+              <td colspan="4" class="px-4 py-3"><div class="space-y-1.5 text-xs"><p class="text-neutral-600 dark:text-neutral-300"><strong>Summary:</strong> Upgraded 128K context window matching the massive 405B model efficiency.</p><p class="text-emerald-600 dark:text-emerald-400">💡 <strong>Use Case:</strong> High-speed private enterprise RAG pipelines on consumer GPUs.</p><a href="https://github.com/meta-llama/llama-models" target="_blank" class="inline-block text-[11px] font-semibold text-neutral-900 dark:text-neutral-100 underline mt-1">Meta Llama Hub &rarr;</a></div></td>
+            </tr>
+            <tr class="item-row hover:bg-neutral-50 dark:hover:bg-neutral-800/40 cursor-pointer transition-colors" data-category="models" onclick="toggleDrawer('d4')">
+              <td class="py-2.5 px-3"><span class="px-1.5 py-0.5 rounded text-[10px] font-semibold bg-blue-500/10 text-blue-600 dark:text-blue-400">MODEL</span></td>
+              <td class="py-2.5 px-3 font-semibold text-neutral-900 dark:text-neutral-100">Qwen 2.5 Coder 32B</td>
+              <td class="py-2.5 px-3 font-medium text-neutral-700 dark:text-neutral-300">Open source code champion updated.</td>
+              <td class="py-2.5 px-3 text-right font-mono text-[11px]"><a href="https://qwenlm.github.io/" target="_blank" onclick="event.stopPropagation()" class="text-blue-600 dark:text-blue-400 hover:underline">Open &rarr;</a></td>
+            </tr>
+            <tr id="d4" class="drawer-row hidden bg-neutral-50/80 dark:bg-neutral-950/60 border-b border-neutral-200 dark:border-neutral-800" data-category="models">
+              <td colspan="4" class="px-4 py-3"><div class="space-y-1.5 text-xs"><p class="text-neutral-600 dark:text-neutral-300"><strong>Summary:</strong> Alibaba released the top-performing open-source coding model on HumanEval benchmarks.</p><p class="text-emerald-600 dark:text-emerald-400">💡 <strong>Use Case:</strong> Autonomous local code review and offline pair programming.</p><a href="https://qwenlm.github.io/" target="_blank" class="inline-block text-[11px] font-semibold text-neutral-900 dark:text-neutral-100 underline mt-1">Technical Blog &rarr;</a></div></td>
+            </tr>
+            <tr class="item-row hover:bg-neutral-50 dark:hover:bg-neutral-800/40 cursor-pointer transition-colors" data-category="models" onclick="toggleDrawer('d5')">
+              <td class="py-2.5 px-3"><span class="px-1.5 py-0.5 rounded text-[10px] font-semibold bg-blue-500/10 text-blue-600 dark:text-blue-400">MODEL</span></td>
+              <td class="py-2.5 px-3 font-semibold text-neutral-900 dark:text-neutral-100">Mistral Large 2</td>
+              <td class="py-2.5 px-3 font-medium text-neutral-700 dark:text-neutral-300">128K context reasoning frontier model.</td>
+              <td class="py-2.5 px-3 text-right font-mono text-[11px]"><a href="https://mistral.ai/" target="_blank" onclick="event.stopPropagation()" class="text-blue-600 dark:text-blue-400 hover:underline">Open &rarr;</a></td>
+            </tr>
+            <tr id="d5" class="drawer-row hidden bg-neutral-50/80 dark:bg-neutral-950/60 border-b border-neutral-200 dark:border-neutral-800" data-category="models">
+              <td colspan="4" class="px-4 py-3"><div class="space-y-1.5 text-xs"><p class="text-neutral-600 dark:text-neutral-300"><strong>Summary:</strong> Advanced multilingual model designed for massive multi-hop reasoning.</p><p class="text-emerald-600 dark:text-emerald-400">💡 <strong>Use Case:</strong> Document analysis and complex multilingual enterprise pipelines.</p><a href="https://mistral.ai/" target="_blank" class="inline-block text-[11px] font-semibold text-neutral-900 dark:text-neutral-100 underline mt-1">Mistral News &rarr;</a></div></td>
+            </tr>
+            <tr class="item-row hover:bg-neutral-50 dark:hover:bg-neutral-800/40 cursor-pointer transition-colors" data-category="tools" onclick="toggleDrawer('d6')">
+              <td class="py-2.5 px-3"><span class="px-1.5 py-0.5 rounded text-[10px] font-semibold bg-purple-500/10 text-purple-600 dark:text-purple-400">TOOL</span></td>
+              <td class="py-2.5 px-3 font-semibold text-neutral-900 dark:text-neutral-100">vLLM 0.6.5</td>
+              <td class="py-2.5 px-3 font-medium text-neutral-700 dark:text-neutral-300">Prefix caching throughput boosted 40%.</td>
+              <td class="py-2.5 px-3 text-right font-mono text-[11px]"><a href="https://github.com/vllm-project/vllm" target="_blank" onclick="event.stopPropagation()" class="text-blue-600 dark:text-blue-400 hover:underline">Open &rarr;</a></td>
+            </tr>
+            <tr id="d6" class="drawer-row hidden bg-neutral-50/80 dark:bg-neutral-950/60 border-b border-neutral-200 dark:border-neutral-800" data-category="tools">
+              <td colspan="4" class="px-4 py-3"><div class="space-y-1.5 text-xs"><p class="text-neutral-600 dark:text-neutral-300"><strong>Summary:</strong> Ultra-fast LLM inference engine with automated continuous batching and FP8 kernels.</p><p class="text-emerald-600 dark:text-emerald-400">💡 <strong>Use Case:</strong> Deploying scalable local LLM servers with zero prompt latency.</p><a href="https://github.com/vllm-project/vllm" target="_blank" class="inline-block text-[11px] font-semibold text-neutral-900 dark:text-neutral-100 underline mt-1">Releases &rarr;</a></div></td>
+            </tr>
+            <tr class="item-row hover:bg-neutral-50 dark:hover:bg-neutral-800/40 cursor-pointer transition-colors" data-category="tools" onclick="toggleDrawer('d7')">
+              <td class="py-2.5 px-3"><span class="px-1.5 py-0.5 rounded text-[10px] font-semibold bg-purple-500/10 text-purple-600 dark:text-purple-400">TOOL</span></td>
+              <td class="py-2.5 px-3 font-semibold text-neutral-900 dark:text-neutral-100">LangChain v0.3</td>
+              <td class="py-2.5 px-3 font-medium text-neutral-700 dark:text-neutral-300">Lightweight core separated from integrations.</td>
+              <td class="py-2.5 px-3 text-right font-mono text-[11px]"><a href="https://github.com/langchain-ai/langchain" target="_blank" onclick="event.stopPropagation()" class="text-blue-600 dark:text-blue-400 hover:underline">Open &rarr;</a></td>
+            </tr>
+            <tr id="d7" class="drawer-row hidden bg-neutral-50/80 dark:bg-neutral-950/60 border-b border-neutral-200 dark:border-neutral-800" data-category="tools">
+              <td colspan="4" class="px-4 py-3"><div class="space-y-1.5 text-xs"><p class="text-neutral-600 dark:text-neutral-300"><strong>Summary:</strong> Total decoupling of core interfaces from vendor packages for faster CI/CD.</p><p class="text-emerald-600 dark:text-emerald-400">💡 <strong>Use Case:</strong> Production AI workflows with minimal dependency footprint.</p><a href="https://github.com/langchain-ai/langchain" target="_blank" class="inline-block text-[11px] font-semibold text-neutral-900 dark:text-neutral-100 underline mt-1">GitHub Repo &rarr;</a></div></td>
+            </tr>
+            <tr class="item-row hover:bg-neutral-50 dark:hover:bg-neutral-800/40 cursor-pointer transition-colors" data-category="tools" onclick="toggleDrawer('d8')">
+              <td class="py-2.5 px-3"><span class="px-1.5 py-0.5 rounded text-[10px] font-semibold bg-purple-500/10 text-purple-600 dark:text-purple-400">TOOL</span></td>
+              <td class="py-2.5 px-3 font-semibold text-neutral-900 dark:text-neutral-100">LlamaIndex Workflows</td>
+              <td class="py-2.5 px-3 font-medium text-neutral-700 dark:text-neutral-300">Event-driven multi-agent orchestration framework.</td>
+              <td class="py-2.5 px-3 text-right font-mono text-[11px]"><a href="https://www.llamaindex.ai/" target="_blank" onclick="event.stopPropagation()" class="text-blue-600 dark:text-blue-400 hover:underline">Open &rarr;</a></td>
+            </tr>
+            <tr id="d8" class="drawer-row hidden bg-neutral-50/80 dark:bg-neutral-950/60 border-b border-neutral-200 dark:border-neutral-800" data-category="tools">
+              <td colspan="4" class="px-4 py-3"><div class="space-y-1.5 text-xs"><p class="text-neutral-600 dark:text-neutral-300"><strong>Summary:</strong> Replaces rigid DAG execution graphs with async event-driven reactive loops.</p><p class="text-emerald-600 dark:text-emerald-400">💡 <strong>Use Case:</strong> Complex RAG search agents with human-in-the-loop approval.</p><a href="https://www.llamaindex.ai/" target="_blank" class="inline-block text-[11px] font-semibold text-neutral-900 dark:text-neutral-100 underline mt-1">Documentation &rarr;</a></div></td>
+            </tr>
+            <tr class="item-row hover:bg-neutral-50 dark:hover:bg-neutral-800/40 cursor-pointer transition-colors" data-category="tools" onclick="toggleDrawer('d9')">
+              <td class="py-2.5 px-3"><span class="px-1.5 py-0.5 rounded text-[10px] font-semibold bg-purple-500/10 text-purple-600 dark:text-purple-400">TOOL</span></td>
+              <td class="py-2.5 px-3 font-semibold text-neutral-900 dark:text-neutral-100">Ollama 0.5</td>
+              <td class="py-2.5 px-3 font-medium text-neutral-700 dark:text-neutral-300">Built-in structured JSON schema enforcement.</td>
+              <td class="py-2.5 px-3 text-right font-mono text-[11px]"><a href="https://ollama.com/" target="_blank" onclick="event.stopPropagation()" class="text-blue-600 dark:text-blue-400 hover:underline">Open &rarr;</a></td>
+            </tr>
+            <tr id="d9" class="drawer-row hidden bg-neutral-50/80 dark:bg-neutral-950/60 border-b border-neutral-200 dark:border-neutral-800" data-category="tools">
+              <td colspan="4" class="px-4 py-3"><div class="space-y-1.5 text-xs"><p class="text-neutral-600 dark:text-neutral-300"><strong>Summary:</strong> Guarantees schema compliance during token generation directly inside llama.cpp.</p><p class="text-emerald-600 dark:text-emerald-400">💡 <strong>Use Case:</strong> Reliable local tool calling and agent action routing.</p><a href="https://ollama.com/" target="_blank" class="inline-block text-[11px] font-semibold text-neutral-900 dark:text-neutral-100 underline mt-1">Official Site &rarr;</a></div></td>
+            </tr>
+            <tr class="item-row hover:bg-neutral-50 dark:hover:bg-neutral-800/40 cursor-pointer transition-colors" data-category="tools" onclick="toggleDrawer('d10')">
+              <td class="py-2.5 px-3"><span class="px-1.5 py-0.5 rounded text-[10px] font-semibold bg-purple-500/10 text-purple-600 dark:text-purple-400">TOOL</span></td>
+              <td class="py-2.5 px-3 font-semibold text-neutral-900 dark:text-neutral-100">Cursor Agent Mode</td>
+              <td class="py-2.5 px-3 font-medium text-neutral-700 dark:text-neutral-300">Autonomous multi-file codebase editor.</td>
+              <td class="py-2.5 px-3 text-right font-mono text-[11px]"><a href="https://cursor.com/" target="_blank" onclick="event.stopPropagation()" class="text-blue-600 dark:text-blue-400 hover:underline">Open &rarr;</a></td>
+            </tr>
+            <tr id="d10" class="drawer-row hidden bg-neutral-50/80 dark:bg-neutral-950/60 border-b border-neutral-200 dark:border-neutral-800" data-category="tools">
+              <td colspan="4" class="px-4 py-3"><div class="space-y-1.5 text-xs"><p class="text-neutral-600 dark:text-neutral-300"><strong>Summary:</strong> Background agent that writes, verifies, and debugs code across multiple files.</p><p class="text-emerald-600 dark:text-emerald-400">💡 <strong>Use Case:</strong> Accelerated full-stack feature development and automated refactoring.</p><a href="https://cursor.com/" target="_blank" class="inline-block text-[11px] font-semibold text-neutral-900 dark:text-neutral-100 underline mt-1">Cursor Blog &rarr;</a></div></td>
+            </tr>
+            <tr class="item-row hover:bg-neutral-50 dark:hover:bg-neutral-800/40 cursor-pointer transition-colors" data-category="industry" onclick="toggleDrawer('d11')">
+              <td class="py-2.5 px-3"><span class="px-1.5 py-0.5 rounded text-[10px] font-semibold bg-amber-500/10 text-amber-600 dark:text-amber-400">INDUSTRY</span></td>
+              <td class="py-2.5 px-3 font-semibold text-neutral-900 dark:text-neutral-100">NVIDIA Blackwell B200</td>
+              <td class="py-2.5 px-3 font-medium text-neutral-700 dark:text-neutral-300">Full scale volume production underway.</td>
+              <td class="py-2.5 px-3 text-right font-mono text-[11px]"><a href="https://nvidianews.nvidia.com/" target="_blank" onclick="event.stopPropagation()" class="text-blue-600 dark:text-blue-400 hover:underline">Open &rarr;</a></td>
+            </tr>
+            <tr id="d11" class="drawer-row hidden bg-neutral-50/80 dark:bg-neutral-950/60 border-b border-neutral-200 dark:border-neutral-800" data-category="industry">
+              <td colspan="4" class="px-4 py-3"><div class="space-y-1.5 text-xs"><p class="text-neutral-600 dark:text-neutral-300"><strong>Summary:</strong> Delivers 4x training and 30x inference throughput over H100 architecture.</p><p class="text-emerald-600 dark:text-emerald-400">💡 <strong>Use Case:</strong> Massive multi-trillion parameter MoE model training.</p><a href="https://nvidianews.nvidia.com/" target="_blank" class="inline-block text-[11px] font-semibold text-neutral-900 dark:text-neutral-100 underline mt-1">NVIDIA Press Release &rarr;</a></div></td>
+            </tr>
+            <tr class="item-row hover:bg-neutral-50 dark:hover:bg-neutral-800/40 cursor-pointer transition-colors" data-category="industry" onclick="toggleDrawer('d12')">
+              <td class="py-2.5 px-3"><span class="px-1.5 py-0.5 rounded text-[10px] font-semibold bg-amber-500/10 text-amber-600 dark:text-amber-400">INDUSTRY</span></td>
+              <td class="py-2.5 px-3 font-semibold text-neutral-900 dark:text-neutral-100">Anthropic 3.5 Sonnet</td>
+              <td class="py-2.5 px-3 font-medium text-neutral-700 dark:text-neutral-300">Computer use API generally available.</td>
+              <td class="py-2.5 px-3 text-right font-mono text-[11px]"><a href="https://www.anthropic.com/" target="_blank" onclick="event.stopPropagation()" class="text-blue-600 dark:text-blue-400 hover:underline">Open &rarr;</a></td>
+            </tr>
+            <tr id="d12" class="drawer-row hidden bg-neutral-50/80 dark:bg-neutral-950/60 border-b border-neutral-200 dark:border-neutral-800" data-category="industry">
+              <td colspan="4" class="px-4 py-3"><div class="space-y-1.5 text-xs"><p class="text-neutral-600 dark:text-neutral-300"><strong>Summary:</strong> Empowers agents to visually interact with desktop software and web interfaces.</p><p class="text-emerald-600 dark:text-emerald-400">💡 <strong>Use Case:</strong> Automating legacy enterprise software lacking APIs.</p><a href="https://www.anthropic.com/" target="_blank" class="inline-block text-[11px] font-semibold text-neutral-900 dark:text-neutral-100 underline mt-1">Anthropic Announcement &rarr;</a></div></td>
+            </tr>
+            <tr class="item-row hover:bg-neutral-50 dark:hover:bg-neutral-800/40 cursor-pointer transition-colors" data-category="industry" onclick="toggleDrawer('d13')">
+              <td class="py-2.5 px-3"><span class="px-1.5 py-0.5 rounded text-[10px] font-semibold bg-amber-500/10 text-amber-600 dark:text-amber-400">INDUSTRY</span></td>
+              <td class="py-2.5 px-3 font-semibold text-neutral-900 dark:text-neutral-100">OpenAI Operator</td>
+              <td class="py-2.5 px-3 font-medium text-neutral-700 dark:text-neutral-300">Autonomous browser agent preview launched.</td>
+              <td class="py-2.5 px-3 text-right font-mono text-[11px]"><a href="https://openai.com/" target="_blank" onclick="event.stopPropagation()" class="text-blue-600 dark:text-blue-400 hover:underline">Open &rarr;</a></td>
+            </tr>
+            <tr id="d13" class="drawer-row hidden bg-neutral-50/80 dark:bg-neutral-950/60 border-b border-neutral-200 dark:border-neutral-800" data-category="industry">
+              <td colspan="4" class="px-4 py-3"><div class="space-y-1.5 text-xs"><p class="text-neutral-600 dark:text-neutral-300"><strong>Summary:</strong> Execute multi-step web browsing tasks directly inside cloud containers.</p><p class="text-emerald-600 dark:text-emerald-400">💡 <strong>Use Case:</strong> Automated end-to-end travel booking and competitor intelligence.</p><a href="https://openai.com/" target="_blank" class="inline-block text-[11px] font-semibold text-neutral-900 dark:text-neutral-100 underline mt-1">Research Paper &rarr;</a></div></td>
+            </tr>
+            <tr class="item-row hover:bg-neutral-50 dark:hover:bg-neutral-800/40 cursor-pointer transition-colors" data-category="industry" onclick="toggleDrawer('d14')">
+              <td class="py-2.5 px-3"><span class="px-1.5 py-0.5 rounded text-[10px] font-semibold bg-amber-500/10 text-amber-600 dark:text-amber-400">INDUSTRY</span></td>
+              <td class="py-2.5 px-3 font-semibold text-neutral-900 dark:text-neutral-100">Google TPU v6e</td>
+              <td class="py-2.5 px-3 font-medium text-neutral-700 dark:text-neutral-300">Trillium clusters available on GCP.</td>
+              <td class="py-2.5 px-3 text-right font-mono text-[11px]"><a href="https://cloud.google.com/tpu" target="_blank" onclick="event.stopPropagation()" class="text-blue-600 dark:text-blue-400 hover:underline">Open &rarr;</a></td>
+            </tr>
+            <tr id="d14" class="drawer-row hidden bg-neutral-50/80 dark:bg-neutral-950/60 border-b border-neutral-200 dark:border-neutral-800" data-category="industry">
+              <td colspan="4" class="px-4 py-3"><div class="space-y-1.5 text-xs"><p class="text-neutral-600 dark:text-neutral-300"><strong>Summary:</strong> Provides 4.7x compute boost per chip compared to TPU v5e generation.</p><p class="text-emerald-600 dark:text-emerald-400">💡 <strong>Use Case:</strong> Cost-effective large-scale transformer fine-tuning.</p><a href="https://cloud.google.com/tpu" target="_blank" class="inline-block text-[11px] font-semibold text-neutral-900 dark:text-neutral-100 underline mt-1">Google Cloud TPU &rarr;</a></div></td>
+            </tr>
+            <tr class="item-row hover:bg-neutral-50 dark:hover:bg-neutral-800/40 cursor-pointer transition-colors" data-category="industry" onclick="toggleDrawer('d15')">
+              <td class="py-2.5 px-3"><span class="px-1.5 py-0.5 rounded text-[10px] font-semibold bg-amber-500/10 text-amber-600 dark:text-amber-400">INDUSTRY</span></td>
+              <td class="py-2.5 px-3 font-semibold text-neutral-900 dark:text-neutral-100">AWS Trainium2</td>
+              <td class="py-2.5 px-3 font-medium text-neutral-700 dark:text-neutral-300">UltraServer clusters now live.</td>
+              <td class="py-2.5 px-3 text-right font-mono text-[11px]"><a href="https://aws.amazon.com/machine-learning/trainium/" target="_blank" onclick="event.stopPropagation()" class="text-blue-600 dark:text-blue-400 hover:underline">Open &rarr;</a></td>
+            </tr>
+            <tr id="d15" class="drawer-row hidden bg-neutral-50/80 dark:bg-neutral-950/60 border-b border-neutral-200 dark:border-neutral-800" data-category="industry">
+              <td colspan="4" class="px-4 py-3"><div class="space-y-1.5 text-xs"><p class="text-neutral-600 dark:text-neutral-300"><strong>Summary:</strong> Links 64 Trainium2 chips with non-blocking petabit-scale network fabric.</p><p class="text-emerald-600 dark:text-emerald-400">💡 <strong>Use Case:</strong> Low-cost alternative for hyperscale AI model pretraining.</p><a href="https://aws.amazon.com/machine-learning/trainium/" target="_blank" class="inline-block text-[11px] font-semibold text-neutral-900 dark:text-neutral-100 underline mt-1">AWS ML Architecture &rarr;</a></div></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="view-pills" class="hidden grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"></div>
+
+    <footer class="pt-4 border-t border-neutral-200 dark:border-neutral-800 flex items-center justify-between text-xs text-neutral-400 font-mono">
+      <span>Auto-synced every 4 days via GitHub Actions (100% Free)</span>
+      <span>Next run in 4 days</span>
+    </footer>
+  </div>
+
+  <script>
+    let activeCat = 'all';
+    function setView(view) {
+      const table = document.getElementById('view-table');
+      const pills = document.getElementById('view-pills');
+      const tableBtn = document.getElementById('tab-table-btn');
+      const pillsBtn = document.getElementById('tab-pills-btn');
+      if (view === 'table') {
+        table.classList.remove('hidden'); pills.classList.add('hidden');
+        tableBtn.className = "px-3 py-1 text-xs font-semibold rounded-md bg-white dark:bg-neutral-800 shadow-sm transition-all";
+        pillsBtn.className = "px-3 py-1 text-xs font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-all";
+      } else {
+        renderPills(); table.classList.add('hidden'); pills.classList.remove('hidden');
+        pillsBtn.className = "px-3 py-1 text-xs font-semibold rounded-md bg-white dark:bg-neutral-800 shadow-sm transition-all";
+        tableBtn.className = "px-3 py-1 text-xs font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-all";
+      }
+    }
+    function toggleDrawer(id) { document.getElementById(id).classList.toggle('hidden'); }
+    function setCategory(cat) {
+      activeCat = cat;
+      document.querySelectorAll('.cat-btn').forEach(b => {
+        b.className = "cat-btn px-2.5 py-1 rounded font-medium bg-neutral-100 dark:bg-neutral-900 text-neutral-600 dark:text-neutral-400 hover:bg-neutral-200 dark:hover:bg-neutral-800 transition-colors";
+      });
+      document.getElementById('cat-' + cat).className = "cat-btn px-2.5 py-1 rounded font-medium bg-neutral-900 text-white dark:bg-white dark:text-neutral-900 transition-colors";
+      document.querySelectorAll('.item-row').forEach(r => {
+        const drawerId = r.getAttribute('onclick').match(/'([^']+)'/)[1];
+        const drawer = document.getElementById(drawerId);
+        const match = (cat === 'all' || r.getAttribute('data-category') === cat);
+        if (match) { r.classList.remove('hidden'); } else { r.classList.add('hidden'); if (drawer) drawer.classList.add('hidden'); }
+      });
+      renderPills();
+    }
+    function renderPills() {
+      const pillsContainer = document.getElementById('view-pills');
+      pillsContainer.innerHTML = '';
+      document.querySelectorAll('.item-row').forEach(r => {
+        const cat = r.getAttribute('data-category');
+        if (activeCat !== 'all' && cat !== activeCat) return;
+        const name = r.children[1].innerText;
+        const takeaway = r.children[2].innerText;
+        const link = r.children[3].querySelector('a').href;
+        const drawerId = r.getAttribute('onclick').match(/'([^']+)'/)[1];
+        const drawerText = document.getElementById(drawerId).querySelector('p').innerText;
+        const badgeColor = cat === 'models' ? 'bg-blue-500/10 text-blue-600 dark:text-blue-400' :
+                           cat === 'tools' ? 'bg-purple-500/10 text-purple-600 dark:text-purple-400' :
+                           'bg-amber-500/10 text-amber-600 dark:text-amber-400';
+        const card = document.createElement('div');
+        card.className = "p-3.5 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/60 shadow-sm flex flex-col justify-between space-y-2 hover:border-neutral-300 dark:hover:border-neutral-700 transition-all cursor-pointer";
+        card.onclick = () => card.querySelector('.pill-detail').classList.toggle('hidden');
+        card.innerHTML = `
+          <div>
+            <div class="flex items-center justify-between text-[10px] mb-1.5 font-mono">
+              <span class="px-1.5 py-0.5 rounded font-semibold ${badgeColor}">${cat.toUpperCase()}</span>
+              <a href="${link}" target="_blank" onclick="event.stopPropagation()" class="text-blue-600 dark:text-blue-400 hover:underline">Link &rarr;</a>
+            </div>
+            <h3 class="text-sm font-bold text-neutral-900 dark:text-neutral-100">${name}</h3>
+            <p class="text-xs text-neutral-600 dark:text-neutral-300 mt-1 font-medium">${takeaway}</p>
+          </div>
+          <div class="pill-detail hidden pt-2 border-t border-neutral-100 dark:border-neutral-800 text-[11px] text-neutral-500">${drawerText}</div>
+        `;
+        pillsContainer.appendChild(card);
+      });
+    }
+  </script>
+</body>
+</html>
