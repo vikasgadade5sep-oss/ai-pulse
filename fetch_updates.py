@@ -1,32 +1,31 @@
 #!/usr/bin/env python3
 """
 AI Pulse — 15-Second Anti-Slop AI Digest Generator
-Fetches 15 verified updates from the last 4 days via Gemini 2.5 Flash + Google Search Grounding.
+Zero-dependency Python script using pure standard library (urllib + json).
+Queries Gemini 2.5 Flash + Google Search Grounding to fetch 15 verified updates from the last 4 days.
 Outputs standalone index.html strictly following the Anti-Slop layout standard.
 """
 
 import os
 import json
-import re
+import urllib.request
+import urllib.error
 from datetime import datetime, timedelta
 
 def get_updates():
     api_key = os.environ.get("GEMINI_API_KEY")
+    today = datetime.now()
+    four_days_ago = today - timedelta(days=4)
+    date_str = f"{four_days_ago.strftime('%b %d')} – {today.strftime('%b %d, %Y')}"
+
     if not api_key:
-        print("[INFO] GEMINI_API_KEY not set. Using verified seed data.")
-        return get_fallback_data()
+        print("[WARN] GEMINI_API_KEY not found in environment. Using fallback data.")
+        return get_fallback_data(date_str)
 
-    try:
-        from google import genai
-        from google.genai import types
-
-        client = genai.Client(api_key=api_key)
-        today = datetime.now()
-        four_days_ago = today - timedelta(days=4)
-        date_str = f"{four_days_ago.strftime('%b %d')} – {today.strftime('%b %d, %Y')}"
-
-        prompt = f"""
-Search the web for the most significant, verified AI news and engineering announcements from the last 4 days ({date_str}).
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={api_key}"
+    
+    prompt = f"""
+Search the live web for the most significant, verified AI news and engineering announcements from the last 4 days ({date_str}).
 You must return EXACTLY 15 updates:
 - 5 under 'models' (Major foundation models, open weights, architecture papers)
 - 5 under 'tools' (Developer tools, libraries, agents, SDKs, CLIs)
@@ -43,9 +42,9 @@ Return ONLY valid JSON matching this schema:
   "date_range": "{date_str}",
   "updates": [
     {{
-      "category": "models" | "tools" | "industry",
+      "category": "models",
       "name": "Exact Name",
-      "takeaway": "Max five word punchy takeaway",
+      "takeaway": "Max five word takeaway",
       "summary": "One sentence technical summary.",
       "use_case": "Practical application or developer workflow unlock.",
       "link": "https://official-source-url"
@@ -53,28 +52,37 @@ Return ONLY valid JSON matching this schema:
   ]
 }}
 """
-        response = client.models.generate_content(
-            model="gemini-2.5-flash",
-            contents=prompt,
-            config=types.GenerateContentConfig(
-                tools=[types.Tool(google_search=types.GoogleSearch())],
-                response_mime_type="application/json"
-            )
-        )
-        data = json.loads(response.text)
-        if "updates" in data and len(data["updates"]) >= 15:
-            return data
-        print("[WARN] Incomplete updates structure. Falling back.")
-        return get_fallback_data()
-    except Exception as e:
-        print(f"[WARN] API query failed ({e}). Using verified fallback.")
-        return get_fallback_data()
 
-def get_fallback_data():
-    today = datetime.now()
-    four_days_ago = today - timedelta(days=4)
+    payload = {
+        "contents": [{"parts": [{"text": prompt}]}],
+        "tools": [{"google_search": {}}],
+        "generationConfig": {
+            "responseMimeType": "application/json"
+        }
+    }
+
+    try:
+        req = urllib.request.Request(
+            url,
+            data=json.dumps(payload).encode("utf-8"),
+            headers={"Content-Type": "application/json"}
+        )
+        with urllib.request.urlopen(req, timeout=60) as response:
+            res = json.loads(response.read().decode("utf-8"))
+            text = res["candidates"][0]["content"]["parts"][0]["text"]
+            data = json.loads(text)
+            if "updates" in data and len(data["updates"]) >= 15:
+                print(f"[SUCCESS] Fetched {len(data['updates'])} live AI updates via Gemini Search!")
+                return data
+            print("[WARN] Incomplete update array. Using fallback.")
+            return get_fallback_data(date_str)
+    except Exception as e:
+        print(f"[ERROR] Gemini API request failed: {e}. Using fallback.")
+        return get_fallback_data(date_str)
+
+def get_fallback_data(date_str):
     return {
-        "date_range": f"{four_days_ago.strftime('%b %d')} – {today.strftime('%b %d, %Y')}",
+        "date_range": date_str,
         "updates": [
             {"category": "models", "name": "Gemini 2.5 Flash", "takeaway": "Sub-second multimodal thinking model released.", "summary": "Google upgraded Flash with adaptive reasoning depth and native coding agents.", "use_case": "High-speed multi-agent orchestration and automated code repair.", "link": "https://ai.google.dev/"},
             {"category": "models", "name": "DeepSeek-V3", "takeaway": "671B MoE open weights released.", "summary": "Activates 37B per token with Multi-Head Latent Attention at 1/5th compute cost.", "use_case": "Self-hosted high-throughput local inference on consumer hardware.", "link": "https://github.com/deepseek-ai/DeepSeek-V3"},
